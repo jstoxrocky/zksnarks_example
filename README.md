@@ -1,5 +1,5 @@
-#zkSNARKs: Driver's Ed.
-##A practical beginner's guide to creating, proving, and verifying zkSNARKs in your contracts
+# zkSNARKs: Driver's Ed.
+## A practical beginner's guide to creating, proving, and verifying zkSNARKs in your contracts
 Joseph Stockermans 
 Jan. 6th 2018
 
