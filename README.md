@@ -179,9 +179,9 @@ I hope you found this tutorial helpful! It helped me a lot to write my understan
     pragma solidity ^0.4.14;
     import './Verifier.sol';
     contract SumsToFifteen is Verifier {
-    	bool public success = false;
-    	function verifyFifteen(
-    		uint[2] a,
+        bool public success = false;
+        function verifyFifteen(
+            uint[2] a,
             uint[2] a_p,
             uint[2][2] b,
             uint[2] b_p,
@@ -190,15 +190,15 @@ I hope you found this tutorial helpful! It helped me a lot to write my understan
             uint[2] h,
             uint[2] k,
             uint[2] input) public {
-    		// Verifiy the proof
-    		success = verifyTx(a, a_p, b, b_p, c, c_p, h, k, input);
-            	if (success) {
-            	    // Proof verified
-            	} else {
-            	    // Sorry, bad proof!
-            	}
-    	    }
+            // Verifiy the proof
+            success = verifyTx(a, a_p, b, b_p, c, c_p, h, k, input);
+            if (success) {
+                // Proof verified
+            } else {
+                // Sorry, bad proof!
+            }
         }
+    }
 
  
 
@@ -433,7 +433,7 @@ I hope you found this tutorial helpful! It helped me a lot to write my understan
         }
     }
 
-### Example Web3.py (Alice)
+### Example Web3 in Python (Alice)
 
     from web3.contract import ConciseContract
     from web3 import Web3, HTTPProvider
