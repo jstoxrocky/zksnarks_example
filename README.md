@@ -478,6 +478,7 @@ I hope you found this tutorial helpful! It helped me a lot to write my understan
     # Check success
     success = contract.success()
     print(success)
+    >> True
     
     # Incorrect input
     I = [6, 1]
@@ -488,3 +489,4 @@ I hope you found this tutorial helpful! It helped me a lot to write my understan
     # Check success
     success = contract.success()
     print(success)
+    >> False
