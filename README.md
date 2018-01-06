@@ -435,7 +435,6 @@ I hope you found this tutorial helpful! It helped me a lot to write my understan
 
 ### Example Web3 in Python (Alice)
 
-    ```python
     from web3.contract import ConciseContract
     from web3 import Web3, HTTPProvider
     import json
@@ -489,4 +488,3 @@ I hope you found this tutorial helpful! It helped me a lot to write my understan
     # Check success
     success = contract.success()
     print(success)
-    ```
