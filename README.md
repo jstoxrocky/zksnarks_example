@@ -192,13 +192,13 @@ I hope you found this tutorial helpful! It helped me a lot to write my understan
             uint[2] input) public {
     		// Verifiy the proof
     		success = verifyTx(a, a_p, b, b_p, c, c_p, h, k, input);
-            if (success) {
-            	// Proof verified
-            } else {
-            	// Sorry, bad proof!
-            }
-    	}
-    }
+            	if (success) {
+            	    // Proof verified
+            	} else {
+            	    // Sorry, bad proof!
+            	}
+    	    }
+        }
 
  
 
