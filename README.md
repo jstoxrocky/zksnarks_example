@@ -77,7 +77,7 @@ First let's watch which ZoKrates commands Charlie, the trusted party, runs. Char
 Charlie's program looks something like this, and assuming we are in the ZoKrates root directory, he saves it to a file called 
 `sumsToFifteen.code`.
 
-    def main(x):
+    def main(x, private s1, private s2):
 	    s1 + s2 + x == 15
 	    return 1
 
