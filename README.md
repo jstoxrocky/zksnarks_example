@@ -107,7 +107,7 @@ With Charlie's hard work finished, let's watch which ZoKrates commands Alice, th
 
 She first computes her witness:
 
-    $ ./target/release/zokrates compute-witness -a 5
+    $ ./target/release/zokrates compute-witness -a 5 --interactive
 
 *(ZoKrates is currently specified so that public arguments are passed following the `-a` flag but private arguments are passed interactively afterwards. Again ZoKrates is a WIP and may change in the future)*. Alice then passes ZoKrates her private values `3` and `7` after being prompted. Zokrates then creates a file called `witness` containing the public and private values making up the witness. Alice grab's the publically available `proving.key` file from Charlie and generates her proof.
 
