@@ -77,11 +77,11 @@ First let's watch which ZoKrates commands Charlie, the trusted party, runs. Char
 Charlie's program looks something like this, and assuming we are in the ZoKrates root directory, he saves it to a file called 
 `sumsToFifteen.code`.
 
-    def main(x):
+    def main(x, private s1, private s2):
 	    s1 + s2 + x == 15
 	    return 1
 
-In Charlie's program, `x` is the public input, and `s1` and `s2` are secret values *(ZoKrates is currently specified so that secret values are not not explicitly passed to the function. Bear in mind that ZoKrates is a new project and a WIP so many details may be subject to change in the future)*. The second line of the program is an assertion statement. Users will not be able to generate proofs for this program if values passed to it cause the the assertion to fail. On the third line, we see that if a proof constructed from this program is verified, it will output `1`.
+In Charlie's program, `x` is the public input, and `s1` and `s2` are secret values *(ZoKrates is currently specified so that secret are explicitly passed to the function, with a `private` keyword. Bear in mind that ZoKrates is a new project and a WIP so many details may be subject to change in the future)*. The second line of the program is an assertion statement. Users will not be able to generate proofs for this program if values passed to it cause the the assertion to fail. On the third line, we see that if a proof constructed from this program is verified, it will output `1`.
 
 Charlie compiles this program written in the ZoKrates higher level language into an arithmetic circuit with the `compile` command.
 
@@ -107,9 +107,9 @@ With Charlie's hard work finished, let's watch which ZoKrates commands Alice, th
 
 She first computes her witness:
 
-    $ ./target/release/zokrates compute-witness -a 5
+    $ ./target/release/zokrates compute-witness -a 5 3 7
 
-*(ZoKrates is currently specified so that public arguments are passed following the `-a` flag but private arguments are passed interactively afterwards. Again ZoKrates is a WIP and may change in the future)*. Alice then passes ZoKrates her private values `3` and `7` after being prompted. Zokrates then creates a file called `witness` containing the public and private values making up the witness. Alice grab's the publically available `proving.key` file from Charlie and generates her proof.
+*(ZoKrates is currently specified so that all arguments are passed following the `-a` flag. Again ZoKrates is a WIP and may change in the future)*. Zokrates then creates a file called `witness` containing the public and private values making up the witness. Alice grab's the publically available `proving.key` file from Charlie and generates her proof.
 
     $ ./target/release/zokrates generate-proof
 
