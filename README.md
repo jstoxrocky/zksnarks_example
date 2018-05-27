@@ -10,9 +10,9 @@ Like many people, when I first heard about the Byzantium update a few months ago
 
 I recently took some time to explore the subject and my journey started with [this article from Consensys](https://media.consensys.net/introduction-to-zksnarks-with-examples-3283b554fc3b) written by Christian Lundkvist. It gives an excellent layman's explanation of zkSNARKs and drafts a token contract with hidden balances (if you have not read this article I highly recommend you do as I will refer to it a lot going forward). I thought this was very cool and decided to try to recreate this contract on my own. The contract code contains a mysterious function called `zksnarkverify`. I wasn't exactly sure what this was or what was included in the Byzantium update, so I initially assumed that this was some kind of new built-in solidity function to use zkSNARKs. Unfortunately, as it turns out, this function was just a vision of a function that *could* exist, and the actual implementation was left to the reader to create for themselves. 
 
-I started Googling to find someone's implemetation of this function and I was quickly overwhelmed by the difficulty of understanding most of the popular articles out there on the subject: Christian Reitwiessner's [zkSNARKs in a Nutshell](https://blog.ethereum.org/2016/12/05/zksnarks-in-a-nutshell/), Vitalik Buterin's 3-part series [Zk-SNARKs: Under the Hood](https://medium.com/@VitalikButerin/zk-snarks-under-the-hood-b33151a013f6), and this seemingly impenetrable [Solidity contract](https://gist.github.com/chriseth/f9be9d9391efc5beb9704255a8e2989d) that stackoverflow users were claiming to be ["the zksnarks solidity code"](https://ethereum.stackexchange.com/questions/16473/is-there-any-working-zk-snark-implementation-even-if-experimental-among-the-ex/21229). These all seemed very complicated to me and none of them really discussed getting up and running with zkSNARKs.  In fact many commenters on the "zksnarks contract" gist seemed to have no idea where to get started.
+I started Googling to find someone's implementation of this function and I was quickly overwhelmed by the difficulty of understanding most of the popular articles out there on the subject: Christian Reitwiessner's [zkSNARKs in a Nutshell](https://blog.ethereum.org/2016/12/05/zksnarks-in-a-nutshell/), Vitalik Buterin's 3-part series [Zk-SNARKs: Under the Hood](https://medium.com/@VitalikButerin/zk-snarks-under-the-hood-b33151a013f6), and this seemingly impenetrable [Solidity contract](https://gist.github.com/chriseth/f9be9d9391efc5beb9704255a8e2989d) that StackOverflow users were claiming to be ["the zksnarks solidity code"](https://ethereum.stackexchange.com/questions/16473/is-there-any-working-zk-snark-implementation-even-if-experimental-among-the-ex/21229). These all seemed very complicated to me and none of them really discussed getting up and running with zkSNARKs.  In fact many commenters on the "zksnarks contract" gist seemed to have no idea where to get started.
 
-What I was looking for was a copy+paste from stackoverflow type answer. When I finally figured something out, I decided to write this tutorial for developers who just want to know how to drive the zkSNARKs car, and not how the car works - so I hope you find this tutorial helpful!
+What I was looking for was a copy+paste from StackOverflow type answer. When I finally figured something out, I decided to write this tutorial for developers who just want to know how to drive the zkSNARKs car, and not how the car works - so I hope you find this tutorial helpful!
 
 
 
@@ -37,7 +37,7 @@ Make sure you have docker installed and running.
     $ docker run -ti zokrates /bin/bash
     $ cd ZoKrates
 
-Great! Now we're inside a Docker container that has all the ZoKrates commands available to us. Before we run anything, I'm going to provide a little description for each of the ZoKrates commands found on their github README, since there is currently no explanation for them.
+Great! Now we're inside a Docker container that has all the ZoKrates commands available to us. Before we run anything, I'm going to provide a little description for each of the ZoKrates commands found on their GitHub README, since there is currently no explanation for them.
 
  - `compile`
 	 - Takes a file written in the ZoKrates higher level language and compiles it into an arithmetic circuit (creates the arithmetic circuit `C` from the Consensys article).
@@ -67,7 +67,7 @@ First, Charlie comes up with a "program" (arithmetic circuit) that he thinks wil
 Next up is Alice. She thinks Charlie's program is very useful and wants to use it to prove something to the Ethereum community without revealing all the values contributing to her proof. She computes a witness that fulfills Charlie's program. She then runs the proving function `P`, inputting her witness and the publicly available proving-key `pk`. She sends the resulting proof along with her public input to Charlie's function `verifyTx`. Since Alice did everything correct, the proof is verified and the `verifyTx` outputs `true`.
 
 #### Bob (an observer)
-Meanwhile, Bob has been watching Charlie's contract. He see's that Alice has sent a transaction to the `verifyTx` function, and that this function returned `true`. He can be certain that this function will only output `true` if Alice provided a proof generated from Charlie's proving-key `pk` and if Alice's public and private input fulfill the necessary constraints of Charlie's program. In other words, he can be sure Alice's proof is valid while still knowing nothing about her private inputs into the proof.
+Meanwhile, Bob has been watching Charlie's contract. He sees that Alice has sent a transaction to the `verifyTx` function, and that this function returned `true`. He can be certain that this function will only output `true` if Alice provided a proof generated from Charlie's proving-key `pk` and if Alice's public and private input fulfill the necessary constraints of Charlie's program. In other words, he can be sure Alice's proof is valid while still knowing nothing about her private inputs into the proof.
 
 ## Taking zkSNARKs for a Test Drive
 ### A concrete example
@@ -81,7 +81,7 @@ Charlie's program looks something like this, and assuming we are in the ZoKrates
 	    s1 + s2 + x == 15
 	    return 1
 
-In Charlie's program, `x` is the public input, and `s1` and `s2` are secret values *(ZoKrates is currently specified so that secret are explicitly passed to the function, with a `private` keyword. Bear in mind that ZoKrates is a new project and a WIP so many details may be subject to change in the future)*. The second line of the program is an assertion statement. Users will not be able to generate proofs for this program if values passed to it cause the the assertion to fail. On the third line, we see that if a proof constructed from this program is verified, it will output `1`.
+In Charlie's program, `x` is the public input, and `s1` and `s2` are secret values *(ZoKrates is currently specified so that secret values are explicitly passed to the function, with a `private` keyword. Bear in mind that ZoKrates is a new project and a WIP so many details may be subject to change in the future)*. The second line of the program is an assertion statement. Users will not be able to generate proofs for this program if values passed to it cause the the assertion to fail. On the third line, we see that if a proof constructed from this program is verified, it will output `1`.
 
 Charlie compiles this program written in the ZoKrates higher level language into an arithmetic circuit with the `compile` command.
 
@@ -109,7 +109,7 @@ She first computes her witness:
 
     $ ./target/release/zokrates compute-witness -a 5 3 7
 
-*(ZoKrates is currently specified so that all arguments are passed following the `-a` flag. Again ZoKrates is a WIP and may change in the future)*. Zokrates then creates a file called `witness` containing the public and private values making up the witness. Alice grab's the publically available `proving.key` file from Charlie and generates her proof.
+*(ZoKrates is currently specified so that all arguments are passed following the `-a` flag. Again ZoKrates is a WIP and may change in the future)*. Zokrates then creates a file called `witness` containing the public and private values making up the witness. Alice grabs the publically available `proving.key` file from Charlie and generates her proof.
 
     $ ./target/release/zokrates generate-proof
 
