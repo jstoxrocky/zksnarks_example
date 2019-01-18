@@ -19,7 +19,7 @@ What I was looking for was a copy+paste from stackoverflow type answer. When I f
 ## Starting the Engine
 ### Introduction to ZoKrates
 
-I remembered a project I had heard about somewhere called [ZoKrates](https://github.com/JacobEberhardt/ZoKrates) that had something to do with Ethereum and zkSNARKs. It turns out that ZoKrates is awesome, and is so far the only way I could find that allows you to create and verify a zero-knowledge proof in a Solidity contract, without needing to know much about what is actually going on "under-the-hood". ZoKrates claims to be a "tool box for zkSNARKs on Ethereum". What I found, is that ZoKrates is a way to create and run all those `C`, `G`, `P`, and `V` functions found in the Consensys article that make up a zkSNARK. On top of this, as it turns out, you can't just write a zero-knowledge proof program as a Javascript function like the article illustrates. Programs written for verification with a zero-knowledge proof need to be written as something called an Arithmetic Circuit. I still don't really know exactly what arithmetic circuits are, but ZoKrates has a built-in higher level language that compiles simple python-like scripts into arithmetic circuits for you! So much thanks to Jacob Eberhardt and all the ZoKrates contributors for building this and helping me in my zkSNARKs journey!
+I remembered a project I had heard about somewhere called [ZoKrates](https://github.com/Zokrates/ZoKrates) that had something to do with Ethereum and zkSNARKs. It turns out that ZoKrates is awesome, and is so far the only way I could find that allows you to create and verify a zero-knowledge proof in a Solidity contract, without needing to know much about what is actually going on "under-the-hood". ZoKrates claims to be a "tool box for zkSNARKs on Ethereum". What I found, is that ZoKrates is a way to create and run all those `C`, `G`, `P`, and `V` functions found in the Consensys article that make up a zkSNARK. On top of this, as it turns out, you can't just write a zero-knowledge proof program as a Javascript function like the article illustrates. Programs written for verification with a zero-knowledge proof need to be written as something called an Arithmetic Circuit. I still don't really know exactly what arithmetic circuits are, but ZoKrates has a built-in higher level language that compiles simple python-like scripts into arithmetic circuits for you! So much thanks to Jacob Eberhardt and all the ZoKrates contributors for building this and helping me in my zkSNARKs journey!
 
 ### Getting Started
 The easiest way to get started with zkSNARKs and ZoKrates is to work with Docker. 
@@ -27,7 +27,7 @@ The easiest way to get started with zkSNARKs and ZoKrates is to work with Docker
 Make sure you have docker installed and running.
 
     # Clone the repo
-    $ git clone https://github.com/JacobEberhardt/ZoKrates.git
+    $ git clone https://github.com/Zokrates/ZoKrates
     $ cd ZoKrates
     
     # Build the Docker image
@@ -40,11 +40,11 @@ Make sure you have docker installed and running.
 Great! Now we're inside a Docker container that has all the ZoKrates commands available to us. Before we run anything, I'm going to provide a little description for each of the ZoKrates commands found on their github README, since there is currently no explanation for them.
 
  - `compile`
-	 - Takes a file written in the ZoKrates higher level language and compiles it into an arithmetic circuit (creates the arithmetic circuit `C` from the Consensys article).
+	 - Takes a file written in the ZoKrates higher level language and compiles it into an arithmetic circuit (creates the arithmetic circuit `C` from the ConsenSys article).
 	 - Mandatory arguments
 		 - `-i path/to/file.code`
  - `setup`
-	 - Generates the proving key and verification key from the arithemetic circuit and "toxic-waste" parameter `lambda` (runs the generator function from the Consensys article `(pk, vk) = G(λ, C)`). 
+	 - Generates the proving key and verification key from the arithemetic circuit and "toxic-waste" parameter `lambda` (runs the generator function from the ConsenSys article `(pk, vk) = G(λ, C)`). 
  - `compute-witness `
 	 - Creates a "witness" for use in generating a proof. A proof is dependent on specific values of public and private arguments. These values are called the witness.
 	 - Mandatory arguments
